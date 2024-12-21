@@ -10,7 +10,7 @@ const Portfolio = () => {
       title: "Project One",
       description: "A beautiful web application built with React and Next.js. Features include user authentication, real-time data updates, and responsive design.",
       category: "Web Development",
-      image: "./src/assets/nextJS.jpg",
+      image: "https://ibb.co/hRv9TF9",
       link: "#",
       tech: ["React", "Next.js", "Tailwind CSS"]
     },
@@ -18,7 +18,7 @@ const Portfolio = () => {
       title: "Project Two",
       description: "Brand identity design for a tech startup. Created complete visual identity including logo, color palette, typography, and marketing materials.",
       category: "Design",
-      image: "./src/assets/textstarup.jpg",
+      image: "https://ibb.co/VNct1ZX",
       link: "#",
       tech: ["Figma", "Illustrator", "Photoshop"]
     },
@@ -26,7 +26,7 @@ const Portfolio = () => {
       title: "Project Three",
       description: "Mobile app UI/UX design and development. Built with React Native featuring smooth animations and offline capabilities.",
       category: "Mobile",
-      image: "./src/assets/mobileUIUX.jpg",
+      image: "https://ibb.co/mCd5hC9",
       link: "#",
       tech: ["React Native", "Firebase", "Redux"]
     },
@@ -34,7 +34,7 @@ const Portfolio = () => {
       title: "Project Four",
       description: "E-commerce platform with advanced filtering, search, and payment integration. Includes admin dashboard and analytics.",
       category: "Web Development",
-      image: "./src/assets/ecom.jpg",
+      image: "https://ibb.co/VYPNKbc",
       link: "#",
       tech: ["Vue.js", "Node.js", "MongoDB"]
     }
