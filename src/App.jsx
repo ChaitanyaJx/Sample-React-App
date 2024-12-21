@@ -49,44 +49,156 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* Background Grid Effect */}
+    <div className="min-h-screen bg-[#000000] text-white relative overflow-hidden">
+      {/* Base Linear Gradient */}
+      <div className="fixed inset-0 bg-[linear-gradient(to_bottom_right,#13151C,#1A1C27)]" />
+      
+      {/* Ambient Gradients */}
+      <div className="fixed inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#996DFF15,transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,#3B096815,transparent_50%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_0%,#00000080_100%)]" />
+      </div>
+
+      {/* Grid Overlay */}
       <div 
-        className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)]"
+        className="fixed inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)]"
         style={{ backgroundSize: '14px 14px' }}
       />
       
-      {/* Purple Gradient Blob */}
-      <div className="absolute top-0 left-0 w-full h-[500px] bg-[radial-gradient(circle_500px_at_50%_200px,#996DFF30,#090909)]" />
+      {/* Mesh Wave Effect */}
+      <div className="fixed bottom-0 left-0 w-full h-[600px] z-0">
+        <svg
+          className="w-full h-full opacity-20"
+          viewBox="0 0 1440 700"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M 0 500 Q 360 400 720 500 Q 1080 600 1440 500 L 1440 700 L 0 700 Z"
+            fill="url(#gradient)"
+          >
+            <animate
+              attributeName="d"
+              dur="10s"
+              repeatCount="indefinite"
+              values="
+                M 0 500 Q 360 400 720 500 Q 1080 600 1440 500 L 1440 700 L 0 700 Z;
+                M 0 500 Q 360 600 720 500 Q 1080 400 1440 500 L 1440 700 L 0 700 Z;
+                M 0 500 Q 360 400 720 500 Q 1080 600 1440 500 L 1440 700 L 0 700 Z
+              "
+            />
+          </path>
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style={{ stopColor: '#996DFF', stopOpacity: 0.3 }} />
+              <stop offset="100%" style={{ stopColor: '#3B0968', stopOpacity: 0.3 }} />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
 
-      {/* Hero Section */}
-      <header className="container mx-auto px-4 py-32 relative">
-        <div className="max-w-3xl">
-          <h1 className="text-6xl font-bold mb-6">
-            Make <span className="text-[#996DFF]">beautiful</span> websites
-          </h1>
-          <p className="text-xl text-zinc-400 mb-8">
-            Crafting digital experiences through modern design and development
-          </p>
-          <div className="flex gap-4">
-            <Button 
-              color="secondary"
-              size="lg"
-              className="font-semibold bg-[#996DFF] text-white hover:bg-[#8A5CF5]"
-            >
-              View Projects
-            </Button>
-            <Button
-              variant="bordered"
-              size="lg"
-              className="font-semibold border-zinc-700 text-white hover:border-[#996DFF]"
-            >
-              Download CV
-            </Button>
+      {/* Content Container */}
+      <div className="relative z-10">
+        {/* Hero Section */}
+        <header className="container mx-auto px-4 py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start max-w-6xl mx-auto">
+            {/* Left Column */}
+            <div className="space-y-8">
+              <div className="space-y-6">
+                <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
+                  Make <span className="text-[#996DFF]">beautiful</span><br />
+                  websites
+                </h1>
+                <p className="text-xl text-zinc-400">
+                  Crafting digital experiences through modern design and development
+                </p>
+              </div>
+              
+              <ul className="space-y-4">
+                <li className="flex items-center gap-3">
+                  <span className="text-[#996DFF] text-xl">•</span>
+                  <span className="text-zinc-300">Responsive web applications</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="text-[#996DFF] text-xl">•</span>
+                  <span className="text-zinc-300">Custom UI/UX design</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="text-[#996DFF] text-xl">•</span>
+                  <span className="text-zinc-300">Modern tech stack</span>
+                </li>
+              </ul>
+
+              <div className="flex gap-4 pt-4">
+                <Button 
+                  size="lg"
+                  className="bg-[#996DFF] text-white hover:bg-[#8A5CF5] px-8"
+                >
+                  View Projects
+                </Button>
+                <Button
+                  variant="bordered"
+                  size="lg"
+                  className="border-zinc-800 text-white hover:border-[#996DFF] px-8"
+                >
+                  Download CV
+                </Button>
+              </div>
+            </div>
+
+            {/* Right Column */}
+            <div className="relative mt-8 lg:mt-0">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#996DFF10] to-transparent rounded-xl"></div>
+              <div className="bg-[#13151C]/80 backdrop-blur-md rounded-xl border border-zinc-800/50 p-8">
+                <h3 className="text-2xl font-semibold mb-8">Expertise</h3>
+                <div className="space-y-6">
+                  <div>
+                    <div className="flex justify-between mb-2">
+                      <p className="text-zinc-300">Frontend Development</p>
+                      <span className="text-[#996DFF]">90%</span>
+                    </div>
+                    <div className="w-full bg-zinc-800/50 rounded-full h-2">
+                      <div className="bg-gradient-to-r from-[#996DFF] to-[#8A5CF5] h-2 rounded-full w-[90%]"></div>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <div className="flex justify-between mb-2">
+                      <p className="text-zinc-300">UI/UX Design</p>
+                      <span className="text-[#996DFF]">85%</span>
+                    </div>
+                    <div className="w-full bg-zinc-800/50 rounded-full h-2">
+                      <div className="bg-gradient-to-r from-[#996DFF] to-[#8A5CF5] h-2 rounded-full w-[85%]"></div>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <div className="flex justify-between mb-2">
+                      <p className="text-zinc-300">Backend Integration</p>
+                      <span className="text-[#996DFF]">75%</span>
+                    </div>
+                    <div className="w-full bg-zinc-800/50 rounded-full h-2">
+                      <div className="bg-gradient-to-r from-[#996DFF] to-[#8A5CF5] h-2 rounded-full w-[75%]"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
+      </div>
+          {/* Ambient Gradients */}
+      <div className="fixed inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#996DFF15,transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,#3B096815,transparent_50%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_0%,#00000080_100%)]" />
+      </div>
 
+      {/* Grid Overlay */}
+      <div 
+        className="fixed inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)]"
+        style={{ backgroundSize: '14px 14px' }}
+      />
       {/* Project Section */}
       <section className="container mx-auto px-4 py-20 relative">
         <h2 className="text-4xl font-bold mb-12 text-center">Featured Projects</h2>
@@ -150,7 +262,7 @@ const Portfolio = () => {
         <div className="max-w-3xl mx-auto text-center">
           <div className="mb-8">
             <img
-              src="./src/assets/icon.jpg"
+              src="https://i.ibb.co/wrxHYvm/icon.jpg"
               alt="Profile"
               className="w-32 h-32 object-cover rounded-full mx-auto mb-6 border-2 border-[#996DFF]"
             />
@@ -191,10 +303,10 @@ const Portfolio = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="container mx-auto px-4 py-20 relative">
+      <section className="container mx-auto px-4 py-10 relative">
         <Card className="max-w-xl mx-auto bg-zinc-900/50 backdrop-blur-sm border border-zinc-800">
           <CardBody className="p-8">
-            <h2 className="text-3xl font-bold mb-6 text-center">Get in Touch</h2>
+            <h2 className="text-3xl text-white font-bold mb-6 text-center">Get in Touch</h2>
             <form className="space-y-6">
               <Input
                 label="Name"
@@ -243,7 +355,7 @@ const Portfolio = () => {
       {/* Footer */}
       <footer className="container mx-auto px-4 py-8 text-center text-zinc-400 relative">
         <Divider className="mb-8 bg-zinc-800" />
-        <p>© 2024 Your Name. All rights reserved.</p>
+        <p>© 2024 Chaitanya. All rights reserved.</p>
       </footer>
 
       <style jsx global>{`
