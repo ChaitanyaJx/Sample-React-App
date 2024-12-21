@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Card, CardBody, CardFooter, CardHeader, Input, Textarea, Divider } from "@nextui-org/react";
 import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
-
+// https://ibb.co/bmCDxS4
+// https://ibb.co/gRVxD0B
+// https://ibb.co/NsLsSqz
+// https://ibb.co/jbdvkSs
 const Portfolio = () => {
   const [clickedCard, setClickedCard] = useState(null);
 
@@ -10,7 +13,7 @@ const Portfolio = () => {
       title: "Project One",
       description: "A beautiful web application built with React and Next.js. Features include user authentication, real-time data updates, and responsive design.",
       category: "Web Development",
-      image: "https://ibb.co/hRv9TF9",
+      image: "https://i.ibb.co/DWvTNxB/nextJS.jpg",
       link: "#",
       tech: ["React", "Next.js", "Tailwind CSS"]
     },
@@ -18,7 +21,7 @@ const Portfolio = () => {
       title: "Project Two",
       description: "Brand identity design for a tech startup. Created complete visual identity including logo, color palette, typography, and marketing materials.",
       category: "Design",
-      image: "https://ibb.co/VNct1ZX",
+      image: "https://i.ibb.co/CH2fnjT/textstarup.jpg",
       link: "#",
       tech: ["Figma", "Illustrator", "Photoshop"]
     },
@@ -26,7 +29,7 @@ const Portfolio = () => {
       title: "Project Three",
       description: "Mobile app UI/UX design and development. Built with React Native featuring smooth animations and offline capabilities.",
       category: "Mobile",
-      image: "https://ibb.co/mCd5hC9",
+      image: "https://i.ibb.co/1L9L6Nx/mobile-UIUX.jpg",
       link: "#",
       tech: ["React Native", "Firebase", "Redux"]
     },
@@ -34,7 +37,7 @@ const Portfolio = () => {
       title: "Project Four",
       description: "E-commerce platform with advanced filtering, search, and payment integration. Includes admin dashboard and analytics.",
       category: "Web Development",
-      image: "https://ibb.co/VYPNKbc",
+      image: "https://i.ibb.co/BcmV29F/ecom.jpg",
       link: "#",
       tech: ["Vue.js", "Node.js", "MongoDB"]
     }
