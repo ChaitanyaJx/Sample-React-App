@@ -55,12 +55,13 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#000010] text-white relative overflow-x-hidden">
+    <div className="min-h-screen bg-[#000000] text-white relative overflow-x-hidden">
       {/* Grid Overlay */}
       <div 
-        className="fixed inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)]"
-        style={{ backgroundSize: '21px 21px' }} 
+    className="fixed inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)]"
+    style={{ backgroundSize: '15px 15px' }} 
       />
+
       {/* Content Container */}
       <div className="relative z-10">
         {/* Hero Section */}
