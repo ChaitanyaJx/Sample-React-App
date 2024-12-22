@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { Button, Card, CardBody, CardFooter, CardHeader, Input, Textarea, Divider } from "@nextui-org/react";
 import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Portfolio = () => {
   const [clickedCard, setClickedCard] = useState(null);
@@ -53,6 +53,44 @@ const Portfolio = () => {
     setClickedCard(index);
     setTimeout(() => setClickedCard(null), 750);
   };
+
+  const [activeIndices, setActiveIndices] = useState(new Set());
+  const observerRefs = useRef([]);
+
+  useEffect(() => {
+    const observers = observerRefs.current.map((ref, index) => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActiveIndices((prev) => new Set([...prev, index]));
+            } else {
+              setActiveIndices((prev) => {
+                const next = new Set(prev);
+                next.delete(index);
+                return next;
+              });
+            }
+          });
+        },
+        {
+          threshold: 0.5,
+          rootMargin: "-20% 0px -20% 0px"
+        }
+      );
+
+      if (ref) {
+        observer.observe(ref);
+      }
+
+      return observer;
+    });
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect());
+    };
+  }, []);
+
 
   return (
     <div className="min-h-screen bg-[#000000] text-white relative overflow-x-hidden">
@@ -139,148 +177,168 @@ const Portfolio = () => {
       </div>
 
       {/* Project Section */}
-      <section className="container mx-auto px-6 py-28 relative">
-      <h2 className="text-6xl font-bold mb-24 text-center text-white relative">
+      <section className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 relative">
+      <h2 className="text-4xl sm:text-6xl font-bold mb-12 sm:mb-24 text-center text-white relative">
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#996DFF] to-[#8A5CF5]">
           Featured Projects
         </span>
       </h2>
 
       {/* Timeline line */}
-      <div className="absolute left-1/2 top-60 bottom-28 w-0.5 bg-gradient-to-b from-[#996DFF] to-transparent" />
+      <div className="hidden sm:block absolute left-1/2 top-36 bottom-28 w-0.5 bg-gradient-to-b from-[#996DFF] to-[#996DFF]/20" />
 
-      <div className="relative space-y-36">
+      <div className="relative space-y-12 sm:space-y-24">
         {projects.map((project, index) => {
           const isEven = index % 2 === 0;
+          const isLast = index === projects.length - 1;
+          const isActive = activeIndices.has(index);
           
           return (
             <div
               key={index}
-              className="flex items-center gap-32"
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              ref={el => observerRefs.current[index] = el}
+              className="flex flex-col sm:flex-row items-center sm:gap-8 lg:gap-32 relative"
             >
-              {/* Timeline dot with increased spacing */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6">
-                <div className={`w-6 h-6 rounded-full bg-[#996DFF] transition-all duration-300 ${
-                  hoveredIndex === index ? 'scale-150' : ''
-                }`}>
-                  <div className="absolute inset-0 rounded-full bg-[#996DFF] animate-ping opacity-50" />
+              {/* Vertical connector line to dot */}
+              {!isLast && (
+                <div className={`hidden sm:block absolute left-1/2 top-[140px] w-0.5 h-24 
+                  bg-gradient-to-b from-[#996DFF]/20 to-[#996DFF] transition-opacity duration-500
+                  ${isActive ? 'opacity-100' : 'opacity-0'}`} 
+                />
+              )}
+              
+              {/* Timeline dot with glow effect */}
+              <div className="hidden sm:block absolute left-1/2 top-[140px] transform -translate-x-1/2 -translate-y-1/2 w-6 h-6">
+                <div className={`w-6 h-6 rounded-full transition-all duration-500 relative
+                  ${isActive ? 'bg-[#996DFF] scale-125' : 'bg-[#996DFF]/40 scale-100'}`}>
+                  {isActive && (
+                    <>
+                      <div className="absolute inset-0 rounded-full bg-[#996DFF] animate-ping opacity-50" />
+                      <div className="absolute inset-[-8px] rounded-full bg-[#996DFF]/30 animate-pulse" />
+                    </>
+                  )}
+                  {/* Horizontal connector lines */}
+                  <div className={`absolute top-1/2 -translate-y-1/2 w-8 h-0.5 
+                    bg-gradient-to-r from-[#996DFF] to-transparent -left-8
+                    transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`} 
+                  />
+                  <div className={`absolute top-1/2 -translate-y-1/2 w-8 h-0.5 
+                    bg-gradient-to-l from-[#996DFF] to-transparent -right-8
+                    transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`} 
+                  />
                 </div>
               </div>
 
-              {/* Left side - with increased margin */}
-              <div className="w-[calc(50%-4rem)] h-96">
-                {isEven ? (
-                  <div className="h-full">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover rounded-xl"
-                    />
-                  </div>
-                ) : (
-                  <Card className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 
-                    transition-all duration-500 relative group h-full flex flex-col
-                    hover:border-[#996DFF]/50 hover:scale-[1.01] hover:shadow-[0_0_60px_8px_#996DFF]">
-                    <CardBody className="p-9 relative flex-1 flex flex-col justify-between">
-                      <div>
-                        <div className="flex justify-between items-start mb-6">
-                          <h3 className="text-3xl text-white font-bold">{project.title}</h3>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="text-zinc-400 hover:text-[#996DFF] transition-colors"
-                          >
-                            <ExternalLink className="w-7 h-7" />
-                          </Button>
-                        </div>
-                        <p className="text-lg text-zinc-400 mb-9">{project.description}</p>
-                      </div>
-                      <div>
-                        <div className="flex flex-wrap gap-3 mb-6">
-                          {project.tech.map((tech, techIndex) => (
-                            <span
-                              key={techIndex}
-                              className="px-4 py-1.5 text-base bg-zinc-800/80 rounded-full text-zinc-300
-                                transition-colors duration-300 hover:bg-[#996DFF]/20 hover:text-[#996DFF]"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                        <Button
-                          variant="ghost"
-                          size="lg"
-                          className="rounded-full bg-[#996DFF]/10 text-[#996DFF] hover:bg-[#996DFF]/20
-                            transition-all duration-300"
-                        >
-                          {project.category}
-                        </Button>
-                      </div>
-                    </CardBody>
-                  </Card>
-                )}
+          {/* Project content wrapper */}
+          <div className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(50%-4rem)]">
+            {isEven ? (
+              <div className="aspect-[16/9] sm:aspect-auto sm:h-[280px]">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover rounded-xl"
+                />
               </div>
+            ) : (
+              <Card className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 
+                transition-all duration-500 relative group sm:h-[280px]
+                hover:border-[#996DFF]/50 hover:scale-[1.01] hover:shadow-[0_0_60px_8px_#996DFF]">
+                <CardBody className="p-6 relative h-full">
+                  <div className="flex flex-col h-full">
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className="text-xl sm:text-2xl text-white font-bold">{project.title}</h3>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="text-zinc-400 hover:text-[#996DFF] transition-colors"
+                      >
+                        <ExternalLink className="w-5 h-5 sm:w-6 sm:h-6" />
+                      </Button>
+                    </div>
+                    <p className="text-sm sm:text-base text-zinc-400 mb-4 flex-grow line-clamp-3">{project.description}</p>
+                    <div className="space-y-3">
+                      <div className="flex flex-wrap gap-1.5">
+                        {project.tech.map((tech, techIndex) => (
+                          <span
+                            key={techIndex}
+                            className="px-2.5 py-1 text-xs sm:text-sm bg-zinc-800/80 rounded-full text-zinc-300
+                              transition-colors duration-300 hover:bg-[#996DFF]/20 hover:text-[#996DFF]"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      <Button
+                        variant="ghost"
+                        className="w-full sm:w-auto h-8 rounded-full bg-[#996DFF]/10 text-[#996DFF] text-sm hover:bg-[#996DFF]/20
+                          transition-all duration-300"
+                      >
+                        {project.category}
+                      </Button>
+                    </div>
+                  </div>
+                </CardBody>
+              </Card>
+            )}
+          </div>
 
-              {/* Right side - with increased margin */}
-              <div className="w-[calc(50%-4rem)] h-96">
-                {isEven ? (
-                  <Card className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 
-                    transition-all duration-500 relative group h-full flex flex-col
-                    hover:border-[#996DFF]/50 hover:scale-[1.01] hover:shadow-[0_0_60px_8px_#996DFF]">
-                    <CardBody className="p-9 relative flex-1 flex flex-col justify-between">
-                      <div>
-                        <div className="flex justify-between items-start mb-6">
-                          <h3 className="text-3xl text-white font-bold">{project.title}</h3>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="text-zinc-400 hover:text-[#996DFF] transition-colors"
+          {/* Second half */}
+          <div className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(50%-4rem)]">
+            {isEven ? (
+              <Card className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 
+                transition-all duration-500 relative group sm:h-[280px]
+                hover:border-[#996DFF]/50 hover:scale-[1.01] hover:shadow-[0_0_60px_8px_#996DFF]">
+                <CardBody className="p-6 relative h-full">
+                  <div className="flex flex-col h-full">
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className="text-xl sm:text-2xl text-white font-bold">{project.title}</h3>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="text-zinc-400 hover:text-[#996DFF] transition-colors"
+                      >
+                        <ExternalLink className="w-5 h-5 sm:w-6 sm:h-6" />
+                      </Button>
+                    </div>
+                    <p className="text-sm sm:text-base text-zinc-400 mb-4 flex-grow line-clamp-3">{project.description}</p>
+                    <div className="space-y-3">
+                      <div className="flex flex-wrap gap-1.5">
+                        {project.tech.map((tech, techIndex) => (
+                          <span
+                            key={techIndex}
+                            className="px-2.5 py-1 text-xs sm:text-sm bg-zinc-800/80 rounded-full text-zinc-300
+                              transition-colors duration-300 hover:bg-[#996DFF]/20 hover:text-[#996DFF]"
                           >
-                            <ExternalLink className="w-7 h-7" />
-                          </Button>
-                        </div>
-                        <p className="text-lg text-zinc-400 mb-9">{project.description}</p>
+                            {tech}
+                          </span>
+                        ))}
                       </div>
-                      <div>
-                        <div className="flex flex-wrap gap-3 mb-6">
-                          {project.tech.map((tech, techIndex) => (
-                            <span
-                              key={techIndex}
-                              className="px-4 py-1.5 text-base bg-zinc-800/80 rounded-full text-zinc-300
-                                transition-colors duration-300 hover:bg-[#996DFF]/20 hover:text-[#996DFF]"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                        <Button
-                          variant="ghost"
-                          size="lg"
-                          className="rounded-full bg-[#996DFF]/10 text-[#996DFF] hover:bg-[#996DFF]/20
-                            transition-all duration-300"
-                        >
-                          {project.category}
-                        </Button>
-                      </div>
-                    </CardBody>
-                  </Card>
-                ) : (
-                  <div className="h-full">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover rounded-xl"
-                    />
+                      <Button
+                        variant="ghost"
+                        className="w-full sm:w-auto h-8 rounded-full bg-[#996DFF]/10 text-[#996DFF] text-sm hover:bg-[#996DFF]/20
+                          transition-all duration-300"
+                      >
+                        {project.category}
+                      </Button>
+                    </div>
                   </div>
-                )}
+                </CardBody>
+              </Card>
+            ) : (
+              <div className="aspect-[16/9] sm:aspect-auto sm:h-[280px]">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover rounded-xl"
+                />
               </div>
-            </div>
-          );
-        })}
-      </div>
-    </section>
+            )}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</section>
 
       {/* Profile Section with Image */}
       <section className="container mx-auto px-4 py-20 relative">
