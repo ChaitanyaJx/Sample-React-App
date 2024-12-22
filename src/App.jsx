@@ -345,7 +345,7 @@ const Portfolio = () => {
         <Card className="max-w-xl mx-auto bg-zinc-900/50 backdrop-blur-sm border border-zinc-800">
           <CardBody className="p-8">
             <h2 className="text-3xl text-white font-bold mb-6 text-center">Get in Touch</h2>
-            <form className="space-y-6">
+            <form className="space-y-6 text-white">
               <Input
                 label="Name"
                 variant="bordered"
