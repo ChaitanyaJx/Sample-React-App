@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Card, CardBody, CardFooter, CardHeader, Input, Textarea, Divider } from "@nextui-org/react";
 import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
-// https://ibb.co/bmCDxS4
-// https://ibb.co/gRVxD0B
-// https://ibb.co/NsLsSqz
-// https://ibb.co/jbdvkSs
+
 const Portfolio = () => {
   const [clickedCard, setClickedCard] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -58,7 +55,7 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#000000] text-white relative overflow-hidden">
+    <div className="min-h-screen bg-[#000010] text-white relative overflow-hidden">
             {/* Grid Overlay */}
       <div 
         className="fixed inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)]"
@@ -173,7 +170,7 @@ const Portfolio = () => {
               onMouseLeave={() => setHoveredIndex(null)}
             >
               {/* Timeline dot */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4">
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 ">
                 <div className={`w-4 h-4 rounded-full bg-[#996DFF] transition-all duration-300 ${
                   hoveredIndex === index ? 'scale-150' : ''
                 }`}>
