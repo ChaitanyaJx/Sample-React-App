@@ -7,6 +7,15 @@ import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
 // https://ibb.co/jbdvkSs
 const Portfolio = () => {
   const [clickedCard, setClickedCard] = useState(null);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  const skills = [
+    { name: "Frontend Development", percentage: 90 },
+    { name: "UI/UX Design", percentage: 85 },
+    { name: "Backend Integration", percentage: 75 },
+    { name: "React/Next.js", percentage: 88 },
+    { name: "Responsive Design", percentage: 92 }
+  ];
 
   const projects = [
     {
@@ -50,53 +59,11 @@ const Portfolio = () => {
 
   return (
     <div className="min-h-screen bg-[#000000] text-white relative overflow-hidden">
-      {/* Base Linear Gradient */}
-      <div className="fixed inset-0 bg-[linear-gradient(to_bottom_right,#13151C,#1A1C27)]" />
-      
-      {/* Ambient Gradients */}
-      <div className="fixed inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#996DFF15,transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,#3B096815,transparent_50%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_0%,#00000080_100%)]" />
-      </div>
-
-      {/* Grid Overlay */}
+            {/* Grid Overlay */}
       <div 
         className="fixed inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)]"
         style={{ backgroundSize: '14px 14px' }}
       />
-      
-      {/* Mesh Wave Effect */}
-      <div className="fixed bottom-0 left-0 w-full h-[600px] z-0">
-        <svg
-          className="w-full h-full opacity-20"
-          viewBox="0 0 1440 700"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M 0 500 Q 360 400 720 500 Q 1080 600 1440 500 L 1440 700 L 0 700 Z"
-            fill="url(#gradient)"
-          >
-            <animate
-              attributeName="d"
-              dur="10s"
-              repeatCount="indefinite"
-              values="
-                M 0 500 Q 360 400 720 500 Q 1080 600 1440 500 L 1440 700 L 0 700 Z;
-                M 0 500 Q 360 600 720 500 Q 1080 400 1440 500 L 1440 700 L 0 700 Z;
-                M 0 500 Q 360 400 720 500 Q 1080 600 1440 500 L 1440 700 L 0 700 Z
-              "
-            />
-          </path>
-          <defs>
-            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" style={{ stopColor: '#996DFF', stopOpacity: 0.3 }} />
-              <stop offset="100%" style={{ stopColor: '#3B0968', stopOpacity: 0.3 }} />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-
       {/* Content Container */}
       <div className="relative z-10">
         {/* Hero Section */}
@@ -148,114 +115,185 @@ const Portfolio = () => {
 
             {/* Right Column */}
             <div className="relative mt-8 lg:mt-0">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#996DFF10] to-transparent rounded-xl"></div>
-              <div className="bg-[#13151C]/80 backdrop-blur-md rounded-xl border border-zinc-800/50 p-8">
-                <h3 className="text-2xl font-semibold mb-8">Expertise</h3>
-                <div className="space-y-6">
-                  <div>
-                    <div className="flex justify-between mb-2">
-                      <p className="text-zinc-300">Frontend Development</p>
-                      <span className="text-[#996DFF]">90%</span>
-                    </div>
-                    <div className="w-full bg-zinc-800/50 rounded-full h-2">
-                      <div className="bg-gradient-to-r from-[#996DFF] to-[#8A5CF5] h-2 rounded-full w-[90%]"></div>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <div className="flex justify-between mb-2">
-                      <p className="text-zinc-300">UI/UX Design</p>
-                      <span className="text-[#996DFF]">85%</span>
-                    </div>
-                    <div className="w-full bg-zinc-800/50 rounded-full h-2">
-                      <div className="bg-gradient-to-r from-[#996DFF] to-[#8A5CF5] h-2 rounded-full w-[85%]"></div>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <div className="flex justify-between mb-2">
-                      <p className="text-zinc-300">Backend Integration</p>
-                      <span className="text-[#996DFF]">75%</span>
-                    </div>
-                    <div className="w-full bg-zinc-800/50 rounded-full h-2">
-                      <div className="bg-gradient-to-r from-[#996DFF] to-[#8A5CF5] h-2 rounded-full w-[75%]"></div>
-                    </div>
-                  </div>
-                </div>
+      {/* Gradient background effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#996DFF10] to-transparent rounded-xl" />
+      
+      {/* Main content container */}
+      <div className="relative bg-[#13151C]/80 backdrop-blur-md rounded-xl border border-zinc-800/50 p-8">
+        <h3 className="text-2xl font-semibold mb-8 text-white">Expertise</h3>
+        
+        <div className="space-y-6">
+          {skills.map((skill, index) => (
+            <div key={index} className="group">
+              <div className="flex justify-between mb-2">
+                <p className="text-zinc-300 font-medium">{skill.name}</p>
+                <span className="text-[#996DFF] font-semibold">{skill.percentage}%</span>
+              </div>
+              
+              {/* Progress bar container */}
+              <div className="w-full bg-zinc-800/50 rounded-full h-2.5 overflow-hidden">
+                {/* Animated progress bar */}
+                <div 
+                  className="bg-gradient-to-r from-[#996DFF] to-[#8A5CF5] h-full rounded-full transition-all duration-500 ease-out group-hover:scale-x-105 origin-left"
+                  style={{ width: `${skill.percentage}%` }}
+                />
               </div>
             </div>
+          ))}
+        </div>
+      </div>
+    </div>
           </div>
         </header>
       </div>
-          {/* Ambient Gradients */}
-      <div className="fixed inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#996DFF15,transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,#3B096815,transparent_50%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_0%,#00000080_100%)]" />
-      </div>
 
-      {/* Grid Overlay */}
-      <div 
-        className="fixed inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)]"
-        style={{ backgroundSize: '14px 14px' }}
-      />
       {/* Project Section */}
       <section className="container mx-auto px-4 py-20 relative">
-        <h2 className="text-4xl font-bold mb-12 text-center">Featured Projects</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <Card 
+      {/* Background glow effect */}
+      {/* <div className="absolute inset-0 bg-gradient-to-b from-[#996DFF]/5 via-transparent to-transparent" /> */}
+      
+      <h2 className="text-4xl font-bold mb-16 text-center text-white relative">
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#996DFF] to-[#8A5CF5]">
+          Featured Projects
+        </span>
+      </h2>
+
+      {/* Timeline line */}
+      <div className="absolute left-1/2 top-40 bottom-20 w-px bg-gradient-to-b from-[#996DFF] to-transparent" />
+
+      <div className="relative space-y-24">
+        {projects.map((project, index) => {
+          const isEven = index % 2 === 0;
+          
+          return (
+            <div
               key={index}
-              className={`bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${
-                clickedCard === index ? 'glow-effect' : ''
-              }`}
-              onClick={() => handleCardClick(index)}
+              className="flex items-center gap-8"
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
-              <CardHeader className="p-0">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-72 object-cover"
-                />
-              </CardHeader>
-              <CardBody className="p-6">
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-2xl text-white font-bold">{project.title}</h3>
-                  <Button
-                    isIconOnly
-                    variant="light"
-                    className="text-zinc-400 hover:text-[#996DFF]"
-                  >
-                    <ExternalLink size={20} />
-                  </Button>
+              {/* Timeline dot */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4">
+                <div className={`w-4 h-4 rounded-full bg-[#996DFF] transition-all duration-300 ${
+                  hoveredIndex === index ? 'scale-150' : ''
+                }`}>
+                  <div className="absolute inset-0 rounded-full bg-[#996DFF] animate-ping opacity-50" />
                 </div>
-                <p className="text-zinc-400 mb-6">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-3 py-1 text-sm bg-zinc-800 rounded-full text-zinc-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </CardBody>
-              <CardFooter>
-                <Button 
-                  color="secondary"
-                  variant="flat" 
-                  size="sm" 
-                  radius="full"
-                  className="bg-[#996DFF]/10 text-[#996DFF]"
-                >
-                  {project.category}
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
-      </section>
+              </div>
+
+              {/* Left side */}
+              <div className="w-1/2 h-72">
+                {isEven ? (
+                  <div className="h-full">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  </div>
+                ) : (
+                  <Card className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 
+                    transition-all duration-500 relative group h-full flex flex-col
+                    hover:border-[#996DFF]/50 hover:scale-[1.01] hover:shadow-[0_0_40px_5px_#996DFF]">
+
+                    <CardBody className="p-6 relative flex-1 flex flex-col justify-between">
+                      <div>
+                        <div className="flex justify-between items-start mb-4">
+                          <h3 className="text-2xl text-white font-bold">{project.title}</h3>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="text-zinc-400 hover:text-[#996DFF] transition-colors"
+                          >
+                            <ExternalLink className="w-5 h-5" />
+                          </Button>
+                        </div>
+                        <p className="text-zinc-400 mb-6">{project.description}</p>
+                      </div>
+                      <div>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {project.tech.map((tech, techIndex) => (
+                            <span
+                              key={techIndex}
+                              className="px-3 py-1 text-sm bg-zinc-800/80 rounded-full text-zinc-300
+                                transition-colors duration-300 hover:bg-[#996DFF]/20 hover:text-[#996DFF]"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="rounded-full bg-[#996DFF]/10 text-[#996DFF] hover:bg-[#996DFF]/20
+                            transition-all duration-300"
+                        >
+                          {project.category}
+                        </Button>
+                      </div>
+                    </CardBody>
+                  </Card>
+                )}
+              </div>
+
+              {/* Right side */}
+              <div className="w-1/2 h-72">
+                {isEven ? (
+                  <Card className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 
+                    transition-all duration-500 relative group h-full flex flex-col
+                    hover:border-[#996DFF]/50 hover:scale-[1.01] hover:shadow-xl hover:shadow-[0_0_40px_5px_#996DFF]">
+                    <CardBody className="p-6 relative flex-1 flex flex-col justify-between">
+                      <div>
+                        <div className="flex justify-between items-start mb-4">
+                          <h3 className="text-2xl text-white font-bold">{project.title}</h3>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="text-zinc-400 hover:text-[#996DFF] transition-colors"
+                          >
+                            <ExternalLink className="w-5 h-5" />
+                          </Button>
+                        </div>
+                        <p className="text-zinc-400 mb-6">{project.description}</p>
+                      </div>
+                      <div>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {project.tech.map((tech, techIndex) => (
+                            <span
+                              key={techIndex}
+                              className="px-3 py-1 text-sm bg-zinc-800/80 rounded-full text-zinc-300
+                                transition-colors duration-300 hover:bg-[#996DFF]/20 hover:text-[#996DFF]"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="rounded-full bg-[#996DFF]/10 text-[#996DFF] hover:bg-[#996DFF]/20
+                            transition-all duration-300"
+                        >
+                          {project.category}
+                        </Button>
+                      </div>
+                    </CardBody>
+                  </Card>
+                ) : (
+                  <div className="h-full">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
 
       {/* Profile Section with Image */}
       <section className="container mx-auto px-4 py-20 relative">
