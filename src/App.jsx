@@ -55,55 +55,55 @@ const Portfolio = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#000010] text-white relative overflow-hidden">
-            {/* Grid Overlay */}
+    <div className="min-h-screen bg-[#000010] text-white relative overflow-x-hidden">
+      {/* Grid Overlay */}
       <div 
         className="fixed inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)]"
-        style={{ backgroundSize: '14px 14px' }}
+        style={{ backgroundSize: '21px 21px' }} 
       />
       {/* Content Container */}
       <div className="relative z-10">
         {/* Hero Section */}
-        <header className="container mx-auto px-4 py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start max-w-6xl mx-auto">
+        <header className="container mx-auto px-8 py-32"> {/* Increased padding */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start max-w-7xl mx-auto"> {/* Increased max width and gap */}
             {/* Left Column */}
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
+            <div className="space-y-12"> {/* Increased spacing */}
+              <div className="space-y-8">
+                <h1 className="text-7xl lg:text-8xl font-bold leading-tight"> {/* Increased font size */}
                   Make <span className="text-[#996DFF]">beautiful</span><br />
                   websites
                 </h1>
-                <p className="text-xl text-zinc-400">
+                <p className="text-2xl text-zinc-400"> {/* Increased font size */}
                   Crafting digital experiences through modern design and development
                 </p>
               </div>
               
-              <ul className="space-y-4">
-                <li className="flex items-center gap-3">
-                  <span className="text-[#996DFF] text-xl">•</span>
-                  <span className="text-zinc-300">Responsive web applications</span>
+              <ul className="space-y-6"> {/* Increased spacing */}
+                <li className="flex items-center gap-4">
+                  <span className="text-[#996DFF] text-3xl">•</span> {/* Increased bullet size */}
+                  <span className="text-zinc-300 text-xl">Responsive web applications</span> {/* Increased font size */}
                 </li>
-                <li className="flex items-center gap-3">
-                  <span className="text-[#996DFF] text-xl">•</span>
-                  <span className="text-zinc-300">Custom UI/UX design</span>
+                <li className="flex items-center gap-4">
+                  <span className="text-[#996DFF] text-3xl">•</span>
+                  <span className="text-zinc-300 text-xl">Custom UI/UX design</span>
                 </li>
-                <li className="flex items-center gap-3">
-                  <span className="text-[#996DFF] text-xl">•</span>
-                  <span className="text-zinc-300">Modern tech stack</span>
+                <li className="flex items-center gap-4">
+                  <span className="text-[#996DFF] text-3xl">•</span>
+                  <span className="text-zinc-300 text-xl">Modern tech stack</span>
                 </li>
               </ul>
 
-              <div className="flex gap-4 pt-4">
+              <div className="flex gap-6 pt-6"> {/* Increased gap and padding */}
                 <Button 
                   size="lg"
-                  className="bg-[#996DFF] text-white hover:bg-[#8A5CF5] px-8"
+                  className="bg-[#996DFF] text-white hover:bg-[#8A5CF5] px-12 py-6 text-xl" 
                 >
                   View Projects
                 </Button>
                 <Button
                   variant="bordered"
                   size="lg"
-                  className="border-zinc-800 text-white hover:border-[#996DFF] px-8"
+                  className="border-zinc-800 text-white hover:border-[#996DFF] px-12 py-6 text-xl"
                 >
                   Download CV
                 </Button>
@@ -111,108 +111,97 @@ const Portfolio = () => {
             </div>
 
             {/* Right Column */}
-            <div className="relative mt-8 lg:mt-0">
-      {/* Gradient background effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#996DFF10] to-transparent rounded-xl" />
-      
-      {/* Main content container */}
-      <div className="relative bg-[#13151C]/80 backdrop-blur-md rounded-xl border border-zinc-800/50 p-8">
-        <h3 className="text-2xl font-semibold mb-8 text-white">Expertise</h3>
-        
-        <div className="space-y-6">
-          {skills.map((skill, index) => (
-            <div key={index} className="group">
-              <div className="flex justify-between mb-2">
-                <p className="text-zinc-300 font-medium">{skill.name}</p>
-                <span className="text-[#996DFF] font-semibold">{skill.percentage}%</span>
-              </div>
-              
-              {/* Progress bar container */}
-              <div className="w-full bg-zinc-800/50 rounded-full h-2.5 overflow-hidden">
-                {/* Animated progress bar */}
-                <div 
-                  className="bg-gradient-to-r from-[#996DFF] to-[#8A5CF5] h-full rounded-full transition-all duration-500 ease-out group-hover:scale-x-105 origin-left"
-                  style={{ width: `${skill.percentage}%` }}
-                />
+            <div className="relative mt-12 lg:mt-0">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#996DFF10] to-transparent rounded-xl" />
+              <div className="relative bg-[#13151C]/80 backdrop-blur-md rounded-xl border border-zinc-800/50 p-12"> {/* Increased padding */}
+                <h3 className="text-3xl font-semibold mb-12 text-white">Expertise</h3> {/* Increased font size and margin */}
+                <div className="space-y-8"> {/* Increased spacing */}
+                  {skills.map((skill, index) => (
+                    <div key={index} className="group">
+                      <div className="flex justify-between mb-3">
+                        <p className="text-zinc-300 font-medium text-xl">{skill.name}</p> {/* Increased font size */}
+                        <span className="text-[#996DFF] font-semibold text-xl">{skill.percentage}%</span>
+                      </div>
+                      <div className="w-full bg-zinc-800/50 rounded-full h-3 overflow-hidden"> {/* Increased height */}
+                        <div 
+                          className="bg-gradient-to-r from-[#996DFF] to-[#8A5CF5] h-full rounded-full transition-all duration-500 ease-out group-hover:scale-x-105 origin-left"
+                          style={{ width: `${skill.percentage}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
-    </div>
           </div>
         </header>
       </div>
 
       {/* Project Section */}
-      <section className="container mx-auto px-4 py-20 relative">
-      {/* Background glow effect */}
-      {/* <div className="absolute inset-0 bg-gradient-to-b from-[#996DFF]/5 via-transparent to-transparent" /> */}
-      
-      <h2 className="text-4xl font-bold mb-16 text-center text-white relative">
+      <section className="container mx-auto px-6 py-28 relative">
+      <h2 className="text-6xl font-bold mb-24 text-center text-white relative">
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#996DFF] to-[#8A5CF5]">
           Featured Projects
         </span>
       </h2>
 
       {/* Timeline line */}
-      <div className="absolute left-1/2 top-40 bottom-20 w-px bg-gradient-to-b from-[#996DFF] to-transparent" />
+      <div className="absolute left-1/2 top-60 bottom-28 w-0.5 bg-gradient-to-b from-[#996DFF] to-transparent" />
 
-      <div className="relative space-y-24">
+      <div className="relative space-y-36">
         {projects.map((project, index) => {
           const isEven = index % 2 === 0;
           
           return (
             <div
               key={index}
-              className="flex items-center gap-8"
+              className="flex items-center gap-32"
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              {/* Timeline dot */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 ">
-                <div className={`w-4 h-4 rounded-full bg-[#996DFF] transition-all duration-300 ${
+              {/* Timeline dot with increased spacing */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6">
+                <div className={`w-6 h-6 rounded-full bg-[#996DFF] transition-all duration-300 ${
                   hoveredIndex === index ? 'scale-150' : ''
                 }`}>
                   <div className="absolute inset-0 rounded-full bg-[#996DFF] animate-ping opacity-50" />
                 </div>
               </div>
 
-              {/* Left side */}
-              <div className="w-1/2 h-72">
+              {/* Left side - with increased margin */}
+              <div className="w-[calc(50%-4rem)] h-96">
                 {isEven ? (
                   <div className="h-full">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover rounded-lg"
+                      className="w-full h-full object-cover rounded-xl"
                     />
                   </div>
                 ) : (
                   <Card className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 
                     transition-all duration-500 relative group h-full flex flex-col
-                    hover:border-[#996DFF]/50 hover:scale-[1.01] hover:shadow-[0_0_40px_5px_#996DFF]">
-
-                    <CardBody className="p-6 relative flex-1 flex flex-col justify-between">
+                    hover:border-[#996DFF]/50 hover:scale-[1.01] hover:shadow-[0_0_60px_8px_#996DFF]">
+                    <CardBody className="p-9 relative flex-1 flex flex-col justify-between">
                       <div>
-                        <div className="flex justify-between items-start mb-4">
-                          <h3 className="text-2xl text-white font-bold">{project.title}</h3>
+                        <div className="flex justify-between items-start mb-6">
+                          <h3 className="text-3xl text-white font-bold">{project.title}</h3>
                           <Button
                             variant="ghost"
                             size="icon"
                             className="text-zinc-400 hover:text-[#996DFF] transition-colors"
                           >
-                            <ExternalLink className="w-5 h-5" />
+                            <ExternalLink className="w-7 h-7" />
                           </Button>
                         </div>
-                        <p className="text-zinc-400 mb-6">{project.description}</p>
+                        <p className="text-lg text-zinc-400 mb-9">{project.description}</p>
                       </div>
                       <div>
-                        <div className="flex flex-wrap gap-2 mb-4">
+                        <div className="flex flex-wrap gap-3 mb-6">
                           {project.tech.map((tech, techIndex) => (
                             <span
                               key={techIndex}
-                              className="px-3 py-1 text-sm bg-zinc-800/80 rounded-full text-zinc-300
+                              className="px-4 py-1.5 text-base bg-zinc-800/80 rounded-full text-zinc-300
                                 transition-colors duration-300 hover:bg-[#996DFF]/20 hover:text-[#996DFF]"
                             >
                               {tech}
@@ -221,7 +210,7 @@ const Portfolio = () => {
                         </div>
                         <Button
                           variant="ghost"
-                          size="sm"
+                          size="lg"
                           className="rounded-full bg-[#996DFF]/10 text-[#996DFF] hover:bg-[#996DFF]/20
                             transition-all duration-300"
                         >
@@ -233,32 +222,32 @@ const Portfolio = () => {
                 )}
               </div>
 
-              {/* Right side */}
-              <div className="w-1/2 h-72">
+              {/* Right side - with increased margin */}
+              <div className="w-[calc(50%-4rem)] h-96">
                 {isEven ? (
                   <Card className="bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 
                     transition-all duration-500 relative group h-full flex flex-col
-                    hover:border-[#996DFF]/50 hover:scale-[1.01] hover:shadow-xl hover:shadow-[0_0_40px_5px_#996DFF]">
-                    <CardBody className="p-6 relative flex-1 flex flex-col justify-between">
+                    hover:border-[#996DFF]/50 hover:scale-[1.01] hover:shadow-[0_0_60px_8px_#996DFF]">
+                    <CardBody className="p-9 relative flex-1 flex flex-col justify-between">
                       <div>
-                        <div className="flex justify-between items-start mb-4">
-                          <h3 className="text-2xl text-white font-bold">{project.title}</h3>
+                        <div className="flex justify-between items-start mb-6">
+                          <h3 className="text-3xl text-white font-bold">{project.title}</h3>
                           <Button
                             variant="ghost"
                             size="icon"
                             className="text-zinc-400 hover:text-[#996DFF] transition-colors"
                           >
-                            <ExternalLink className="w-5 h-5" />
+                            <ExternalLink className="w-7 h-7" />
                           </Button>
                         </div>
-                        <p className="text-zinc-400 mb-6">{project.description}</p>
+                        <p className="text-lg text-zinc-400 mb-9">{project.description}</p>
                       </div>
                       <div>
-                        <div className="flex flex-wrap gap-2 mb-4">
+                        <div className="flex flex-wrap gap-3 mb-6">
                           {project.tech.map((tech, techIndex) => (
                             <span
                               key={techIndex}
-                              className="px-3 py-1 text-sm bg-zinc-800/80 rounded-full text-zinc-300
+                              className="px-4 py-1.5 text-base bg-zinc-800/80 rounded-full text-zinc-300
                                 transition-colors duration-300 hover:bg-[#996DFF]/20 hover:text-[#996DFF]"
                             >
                               {tech}
@@ -267,7 +256,7 @@ const Portfolio = () => {
                         </div>
                         <Button
                           variant="ghost"
-                          size="sm"
+                          size="lg"
                           className="rounded-full bg-[#996DFF]/10 text-[#996DFF] hover:bg-[#996DFF]/20
                             transition-all duration-300"
                         >
@@ -281,7 +270,7 @@ const Portfolio = () => {
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover rounded-lg"
+                      className="w-full h-full object-cover rounded-xl"
                     />
                   </div>
                 )}
